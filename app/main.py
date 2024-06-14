@@ -8,8 +8,6 @@ def main():
 
     # Wait for user input
     command = input()
-
-    command = input()
     sys.stdout.write(f"{command}: command not found\n")
     main()
 
