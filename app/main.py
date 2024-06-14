@@ -8,12 +8,10 @@ def main():
 
     # Wait for user input
     command = input()
-    # list of commands
-    commandList = []
-    commandList.add(command)
 
-    for command in commandList:
-        sys.stdout.write(f"{command}: command not found\n")
+    command = input()
+    sys.stdout.write(f"{command}: command not found\n")
+    main()
 
 
 if __name__ == "__main__":
