@@ -10,8 +10,8 @@ def main():
     command = input()
     if command == "exit 0":
         exit(0)
-    elif command[0:3] == "echo":
-        return print(command[4:])
+    elif command.startswith("echo "):
+        print(command[len("echo ") :])
     else:
         sys.stdout.write(f"{command}: command not found\n")
 
