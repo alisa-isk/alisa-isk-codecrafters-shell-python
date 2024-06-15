@@ -8,7 +8,7 @@ def print_type(command):
     if command in command_list:
         sys.stdout.write(f"{command} is a shell builtin\n")
     else:
-        sys.stdout.write(f"{command}: command not found\n")
+        sys.stdout.write(f"{command}: not found\n")
 
 
 def main():
