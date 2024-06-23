@@ -4,6 +4,7 @@ import os
 command_list = ["echo", "exit", "type"]
 PATH = os.environ.get("PATH")
 
+
 def get_file_path(PATH, file_name):
     """helper function to get path of command"""
     directories = PATH.split(":")
@@ -31,6 +32,7 @@ def print_type(command):
 
 
 def main():
+    """main for shell"""
     sys.stdout.write("$ ")
     sys.stdout.flush()
 
@@ -41,9 +43,10 @@ def main():
         print(command[len("echo "):])
     elif command.startswith("type "):
         print_type(command)
+    elif os.path.isfile(command):
+        os.system(command)
     else:
         sys.stdout.write(f"{command}: command not found\n")
-
     main()
 
 
