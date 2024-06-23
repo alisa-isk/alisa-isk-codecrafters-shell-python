@@ -33,30 +33,31 @@ def print_type(command):
 
 def main():
     """main for shell"""
-    sys.stdout.write("$ ")
-    sys.stdout.flush()
+    while True:
+        sys.stdout.write("$ ")
+        sys.stdout.flush()
 
-    command = input()
-    if command == "exit 0":
-        exit(0)
-    elif command.startswith("echo "):
-        print(command[len("echo "):])
-    elif command.startswith("type "):
-        print_type(command)
-    elif command == "pwd":
-        sys.stdout.write(f"{os.getcwd()}\n")
-    else:
-        parts = command.split()
-        executable = get_file_path(PATH, parts[0])
-        if executable:
-            try:
-                subprocess.run(parts)
-            except subprocess.CalledProcessError as e:
-                sys.stderr.write(f"{command}: {e}\n")
+        command = input()
+        if command == "exit 0":
+            exit(0)
+        elif command.startswith("echo "):
+            print(command[len("echo "):])
+        elif command.startswith("type "):
+            print_type(command)
+        elif command == "pwd":
+            sys.stdout.write(f"{os.getcwd()}\n")
         else:
-            sys.stdout.write(f"{command}: command not found\n")
+            parts = command.split()
+            executable = get_file_path(PATH, parts[0])
+            if executable:
+                try:
+                    subprocess.run(parts)
+                except subprocess.CalledProcessError as e:
+                    sys.stderr.write(f"{command}: {e}\n")
+            else:
+                sys.stdout.write(f"{command}: command not found\n")
 
-    main()
+        main()
 
 
 if __name__ == "__main__":
