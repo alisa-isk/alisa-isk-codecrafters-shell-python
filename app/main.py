@@ -43,6 +43,8 @@ def main():
         print(command[len("echo "):])
     elif command.startswith("type "):
         print_type(command)
+    elif command == "pwd":
+        print(os.getcwd())
     else:
         parts = command.split()
         executable = get_file_path(PATH, parts[0])
