@@ -6,21 +6,12 @@ command_list = ["echo", "exit", "type"]
 PATH = os.environ.get("PATH")
 
 
-def find_executable(command: str) -> str:
-    path = os.environ.get("PATH")
-    executable_dirs = path.split(":")
-    for dir in executable_dirs:
-        if os.path.exists(f"{dir}/{command}"):
-            return f"{dir}/{command}"
-
-
 def get_file_path(PATH, file_name):
-    """helper function to get path of command"""
+    """Helper function to get path of command"""
     directories = PATH.split(":")
     for directory in directories:
         path = os.path.join(directory, file_name)
-        # Case when command is found
-        if os.path.isfile(path):
+        if os.path.isfile(path) and os.access(path, os.X_OK):
             return path
     return None
 
@@ -53,11 +44,15 @@ def main():
     elif command.startswith("type "):
         print_type(command)
     else:
-        path = find_executable(command)
-        if not path:
-            sys.stdout.write(f"{command}: command not found\n")
+        parts = command.split()
+        executable = get_file_path(PATH, parts[0])
+        if executable:
+            try:
+                subprocess.run(parts)
+            except subprocess.CalledProcessError as e:
+                sys.stderr.write(f"{command}: {e}\n")
         else:
-            subprocess.run(command)
+            sys.stdout.write(f"{command}: command not found\n")
 
     main()
 
