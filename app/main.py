@@ -57,7 +57,7 @@ def main():
             else:
                 sys.stdout.write(f"{command}: command not found\n")
 
-        main()
+
 
 
 if __name__ == "__main__":
