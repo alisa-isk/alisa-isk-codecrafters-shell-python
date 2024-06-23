@@ -2,7 +2,7 @@ import sys
 import os
 import subprocess
 
-command_list = ["echo", "exit", "type"]
+command_list = ["echo", "exit", "type", "pwd"]
 PATH = os.environ.get("PATH")
 
 
