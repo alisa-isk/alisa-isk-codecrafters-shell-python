@@ -1,8 +1,17 @@
 import sys
 import os
+import subprocess
 
 command_list = ["echo", "exit", "type"]
 PATH = os.environ.get("PATH")
+
+
+def find_executable(command: str) -> str:
+    path = os.environ.get("PATH")
+    executable_dirs = path.split(":")
+    for dir in executable_dirs:
+        if os.path.exists(f"{dir}/{command}"):
+            return f"{dir}/{command}"
 
 
 def get_file_path(PATH, file_name):
@@ -43,10 +52,13 @@ def main():
         print(command[len("echo "):])
     elif command.startswith("type "):
         print_type(command)
-    elif os.path.isfile(command):
-        os.system(command)
     else:
-        sys.stdout.write(f"{command}: command not found\n")
+        path = find_executable(command)
+        if not path:
+            sys.stdout.write(f"{command}: command not found\n")
+        else:
+            subprocess.run(command)
+
     main()
 
 
