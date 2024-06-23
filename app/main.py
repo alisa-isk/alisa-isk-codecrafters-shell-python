@@ -44,7 +44,7 @@ def main():
     elif command.startswith("type "):
         print_type(command)
     elif command == "pwd":
-        print(f"{os.getcwd()}")
+        sys.stdout.write(f"{os.getcwd()}\n")
     else:
         parts = command.split()
         executable = get_file_path(PATH, parts[0])
