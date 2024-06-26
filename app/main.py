@@ -46,7 +46,7 @@ def main():
             print_type(command)
         elif command == "pwd":
             sys.stdout.write(f"{os.getcwd()}\n")
-        elif command.startswith("cd"):
+        elif command.startswith("cd "):
             try:
                 os.chdir(" ".join(command[1:]))
             except FileNotFoundError:
