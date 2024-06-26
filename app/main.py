@@ -48,9 +48,9 @@ def main():
             sys.stdout.write(f"{os.getcwd()}\n")
         elif command.startswith("cd "):
             try:
-                os.chdir(" ".join(command[1:]))
+                os.chdir(command[len("cd "):].strip())
             except FileNotFoundError:
-                print(" ".join(command) + ": No such file or directory")
+                sys.stdout.write(f"cd: {command[len("cd "):].strip()}: No such file or directory\n")
         else:
             parts = command.split()
             executable = get_file_path(PATH, parts[0])
