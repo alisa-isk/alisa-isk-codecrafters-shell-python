@@ -47,12 +47,13 @@ def main():
         elif command == "pwd":
             sys.stdout.write(f"{os.getcwd()}\n")
         elif command.startswith("cd "):
-            if command[len("cd "):] == "~":
-                os.path.expanduser("~")
+            newpath = command[len("cd "):].strip()
+            if newpath == "~":
+                newpath = os.path.expanduser("~")
             try:
-                os.chdir(command[len("cd "):].strip())
+                os.chdir(newpath)
             except FileNotFoundError:
-                sys.stdout.write(f"cd: {command[len("cd "):].strip()}: No such file or directory\n")
+                sys.stdout.write(f"cd: {newpath}: No such file or directory\n")
         else:
             parts = command.split()
             executable = get_file_path(PATH, parts[0])
