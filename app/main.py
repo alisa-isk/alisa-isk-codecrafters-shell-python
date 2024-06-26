@@ -32,7 +32,21 @@ def print_type(command):
 
 
 def main():
-    """main for shell"""
+    """Main function for the shell.
+
+    This function continuously prompts the user for input, processes the commands
+    provided, and executes built-in commands or external programs. It supports
+    built-in commands such as `echo`, `exit`, `type`, `pwd`, and `cd`, and can
+    run external programs found in the system's PATH.
+
+    Built-in commands:
+    - echo: Prints the provided string to standard output.
+    - exit: Exits the shell.
+    - type: Displays information about the specified command.
+    - pwd: Prints the current working directory.
+    - cd: Changes the current working directory to the specified path. Supports `~` for the home directory.
+
+    If a command is not a built-in, it attempts to find and execute it as an external program."""
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
