@@ -49,6 +49,8 @@ def main():
         elif command.startswith("cd "):
             try:
                 os.chdir(command[len("cd "):].strip())
+            except command[len("cd "):] == "~":
+                os.chdir("/home/user")
             except FileNotFoundError:
                 sys.stdout.write(f"cd: {command[len("cd "):].strip()}: No such file or directory\n")
         else:
