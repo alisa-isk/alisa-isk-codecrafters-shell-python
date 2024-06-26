@@ -47,10 +47,10 @@ def main():
         elif command == "pwd":
             sys.stdout.write(f"{os.getcwd()}\n")
         elif command.startswith("cd "):
+            if command[len("cd "):] == "~":
+                os.path.expanduser("~")
             try:
                 os.chdir(command[len("cd "):].strip())
-            except command[len("cd "):] == "~":
-                os.chdir("/home/user")
             except FileNotFoundError:
                 sys.stdout.write(f"cd: {command[len("cd "):].strip()}: No such file or directory\n")
         else:
